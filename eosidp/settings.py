@@ -87,6 +87,8 @@ DATABASES = {
 # Authentication settings
 
 AUTH_USER_MODEL = 'main.User'
+LOGIN_URL = '/login/'
+LOGIN_REDIRECT_URL = '/'
 
 
 # Password validation
