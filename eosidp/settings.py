@@ -90,6 +90,11 @@ AUTH_USER_MODEL = 'main.User'
 LOGIN_URL = '/login/'
 LOGIN_REDIRECT_URL = '/'
 
+# OpenID Connect settings
+# https://django-oidc-provider.readthedocs.io/en/latest/sections/settings.html
+
+OIDC_USERINFO = 'main.utils.oidc_userinfo'
+
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
