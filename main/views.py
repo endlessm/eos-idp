@@ -4,13 +4,21 @@ from django.shortcuts import render
 from django.utils.translation import gettext_lazy as _
 
 
-@login_required
 def index(request):
     """Home page view"""
     context = {
-        'title': 'Endless Account',
+        'title': _('Endless Account'),
     }
     return render(request, 'main/index.html', context=context)
+
+
+@login_required
+def profile(request):
+    """Account profile view"""
+    context = {
+        'title': _('Profile'),
+    }
+    return render(request, 'main/profile.html', context=context)
 
 
 class LoginView(auth_views.LoginView):

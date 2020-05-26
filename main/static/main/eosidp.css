@@ -6,6 +6,14 @@ h1, h2 {
     color: #ea5b0c;
 }
 
+table {
+    width: 100%;
+}
+
+th, td {
+    text-align: left;
+}
+
 .logo {
     width: 25%;
 }
