@@ -8,9 +8,25 @@
   </head>
   <body>
     <div class="header">
-      <a href="{% url 'main:index' %}">
-        <img class="logo" src="{% static "main/logo.svg" %}" alt="Endless">
-      </a>
+      <ul class="navbar">
+        <li class="left">
+          <a class="logo" href="{% url 'main:index' %}">
+            <img class="logo" src="{% static "main/logo.svg" %}" alt="Endless">
+          </a>
+        </li>
+        {% if user.is_authenticated %}
+        <li>
+          <a href="{% url 'main:logout' %}">Logout</a>
+        </li>
+        <li>
+          <a href="{% url 'main:profile' %}">Profile</a>
+        </li>
+        {% else %}
+        <li>
+          <a href="{% url 'main:login' %}">Login</a>
+        </li>
+        {% endif %}
+      </ul>
     </div>
     <div class="content">
       {% block content %}
