@@ -18,6 +18,7 @@ from django.urls import include, path
 
 urlpatterns = [
     path('', include('main.urls')),
+    path('', include('allauth.urls')),
     path('', include('oidc_provider.urls', namespace='oidc_provider')),
     path('admin/', admin.site.urls),
 ]

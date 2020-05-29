@@ -16,14 +16,14 @@
         </li>
         {% if user.is_authenticated %}
         <li>
-          <a href="{% url 'main:logout' %}">Logout</a>
+          <a href="{% url 'account_logout' %}">Logout</a>
         </li>
         <li>
           <a href="{% url 'main:profile' %}">Profile</a>
         </li>
         {% else %}
         <li>
-          <a href="{% url 'main:login' %}">Login</a>
+          <a href="{% url 'account_login' %}">Login</a>
         </li>
         {% endif %}
       </ul>
