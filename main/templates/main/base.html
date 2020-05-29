@@ -1,7 +1,7 @@
 {% load static %}<!DOCTYPE html>
 <html lang="{{ LANGUAGE_CODE|default:"en-us" }}">
   <head>
-    <title>{{ title }}</title>
+    <title>{% block title %}{{ title }}{% endblock %}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="{% static "main/eosidp.css" %}">
     <link rel="icon" type="image/png" href="{% static "main/endless-96x96.png" %}">
@@ -22,6 +22,9 @@
           <a href="{% url 'main:profile' %}">Profile</a>
         </li>
         {% else %}
+        <li>
+          <a href="{% url 'account_signup' %}">Signup</a>
+        </li>
         <li>
           <a href="{% url 'account_login' %}">Login</a>
         </li>
