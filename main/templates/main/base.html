@@ -3,15 +3,15 @@
   <head>
     <title>{% block title %}{{ title }}{% endblock %}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" href="{% static "main/eosidp.css" %}">
-    <link rel="icon" type="image/png" href="{% static "main/endless-96x96.png" %}">
+    <link rel="stylesheet" type="text/css" href="{% static "css/eosidp.css" %}">
+    <link rel="icon" type="image/png" href="{% static "img/favicon-32x32.png" %}">
   </head>
   <body>
     <div class="header">
       <ul class="navbar">
         <li class="left">
           <a class="logo" href="{% url 'main:index' %}">
-            <img class="logo" src="{% static "main/logo.svg" %}" alt="Endless">
+            <img class="logo" src="{% static "img/logo.svg" %}" alt="Endless">
           </a>
         </li>
         {% if user.is_authenticated %}
