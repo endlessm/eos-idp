@@ -14,30 +14,35 @@
     {% endblock %}
   </head>
   <body>
-    <div class="header">
-      <ul class="navbar">
-        <li class="left">
-          <a class="logo" href="{% url 'main:index' %}">
-            <img class="logo" src="{% static "img/logo.svg" %}" alt="Endless">
-          </a>
-        </li>
-        {% if user.is_authenticated %}
-        <li>
-          <a href="{% url 'account_logout' %}">Logout</a>
-        </li>
-        <li>
-          <a href="{% url 'main:profile' %}">Profile</a>
-        </li>
-        {% else %}
-        <li>
-          <a href="{% url 'account_signup' %}">Signup</a>
-        </li>
-        <li>
-          <a href="{% url 'account_login' %}">Login</a>
-        </li>
-        {% endif %}
-      </ul>
-    </div>
+    <nav class="navbar navbar-expand-xl navbar-light bg-light">
+      <a class="navbar-brand" href="/">
+        <img src="{% static "img/logo.svg" %}" height="30" alt="Endless">
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse"
+              data-target="#navbarCollapse" aria-controls="navbarCollapse"
+              aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarCollapse">
+        <ul class="navbar-nav ml-auto">
+          {% if user.is_authenticated %}
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'account_logout' %}">Logout</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'main:profile' %}">Profile</a>
+          </li>
+          {% else %}
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'account_signup' %}">Signup</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'account_login' %}">Login</a>
+          </li>
+          {% endif %}
+        </ul>
+      </div>
+    </nav>
     {% if messages %}
     <div>
       <strong>Messages:</strong>
@@ -48,11 +53,9 @@
       </ul>
     </div>
     {% endif %}
-    <div class="content">
+    <div class="container">
       {% block content %}
       {% endblock %}
-    </div>
-    <div class="footer">
     </div>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
             integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
