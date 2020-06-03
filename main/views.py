@@ -4,12 +4,10 @@ from django.shortcuts import render
 from django.utils.translation import gettext_lazy as _
 
 
-def index(request):
+@login_required
+def home(request):
     """Home page view"""
-    context = {
-        'title': _('Endless Account'),
-    }
-    return render(request, 'main/index.html', context=context)
+    return render(request, 'main/home.html')
 
 
 @login_required

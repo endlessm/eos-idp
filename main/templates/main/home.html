@@ -1,0 +1,72 @@
+{% extends 'main/base.html' %}
+
+{% load i18n %}
+
+{% block title %}{% trans "Home" %}{% endblock %}
+
+{% block content %}
+<div class="text-center">
+  <h1>{% trans "Welcome" %}, {{ user.get_full_name }}</h1>
+  <p class="lead text-muted">
+    {% blocktrans %}Manage the information and security of your Endless
+    Account{% endblocktrans %}
+  </p>
+</div>
+<div class="row row-cols-1 row-cols-md-2 justify-content-center">
+  <div class="col">
+    <div class="card mb-3 shadow-sm">
+      <div class="card-body">
+        <h3 class="card-title">Profile</h3>
+        <p class="card-text">
+          Setup basic information for your account like your name
+        </p>
+        <hr>
+        <a href="{% url 'main:profile' %}" class="card-link">Edit profile</a>
+      </div>
+    </div>
+  </div>
+  <div class="col">
+    <div class="card mb-3 shadow-sm">
+      <div class="card-body">
+        <h3 class="card-title">Email</h3>
+        <p class="card-text">
+          Add or remove email addresses associated to your account
+        </p>
+        <hr>
+        <a href="{% url 'account_email' %}" class="card-link">
+          Manage email addresses
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="col">
+    <div class="card mb-3 shadow-sm">
+      <div class="card-body">
+        <h3 class="card-title">Password</h3>
+        <p class="card-text">
+          Change or set the password for your account
+        </p>
+        <hr>
+        <a href="{% url 'account_change_password' %}" class="card-link">
+          Change password
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="col">
+    <div class="card mb-3 shadow-sm">
+      <div class="card-body">
+        <h3 class="card-title">Account Connections</h3>
+        <p class="card-text">
+          Sign in to your Endless Account from other services you already
+          use
+        </p>
+        <hr>
+        <a href="{% url 'socialaccount_connections' %}" class="card-link">
+          Connect login services
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
