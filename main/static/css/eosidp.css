@@ -1,3 +1,8 @@
 h1, h2 {
     color: #ea5b0c;
 }
+
+.navbar-img {
+    height: 2rem;
+    width: auto;
+}
