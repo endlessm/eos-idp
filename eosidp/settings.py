@@ -115,6 +115,13 @@ AUTHENTICATION_BACKENDS = [
 
 OIDC_USERINFO = 'main.utils.oidc_userinfo'
 
+# Allauth settings
+# https://django-allauth.readthedocs.io/en/latest/configuration.html
+
+ACCOUNT_USERNAME_REQUIRED = True
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
+ACCOUNT_SIGNUP_EMAIL_ENTER_TWICE = True
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
