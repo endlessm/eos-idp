@@ -6,3 +6,8 @@ h1, h2 {
     height: 2rem;
     width: auto;
 }
+
+.socialaccount-img {
+    height: 1.25em;
+    width: auto;
+}

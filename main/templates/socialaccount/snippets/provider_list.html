@@ -1,3 +1,4 @@
+{% load static %}
 {% load socialaccount %}
 
 {% get_providers as socialaccount_providers %}
@@ -5,18 +6,26 @@
 {% for provider in socialaccount_providers %}
 {% if provider.id == "openid" %}
 {% for brand in provider.get_brands %}
-<div class="col-md-6">
+<div class="col">
   <a title="{{ brand.name }}" class="btn btn-outline-secondary btn-block"
      href="{% provider_login_url provider.id openid=brand.openid_url process=process %}">
-    {{ brand.name }}
+    <div class="d-flex align-items-center">
+      <img class="socialaccount-img mr-2" alt="{{ brand.name }}"
+           src="{% static 'socialaccount/'|add:brand.id|add:'.png' %}">
+      <span>{{ brand.name }}</span>
+    </div>
   </a>
 </div>
 {% endfor %}
 {% endif %}
-<div class="col-md-6">
+<div class="col">
   <a title="{{ provider.name }}" class="btn btn-outline-secondary btn-block"
      href="{% provider_login_url provider.id process=process scope=scope auth_params=auth_params %}">
-    {{ provider.name }}
+    <div class="d-flex align-items-center">
+      <img class="socialaccount-img mr-3" alt="{{ provider.name }}"
+           src="{% static 'socialaccount/'|add:provider.id|add:'.png' %}">
+      <span>{{ provider.name }}</span>
+    </div>
   </a>
 </div>
 {% endfor %}
