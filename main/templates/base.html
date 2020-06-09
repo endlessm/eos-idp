@@ -15,7 +15,8 @@
     {% endblock %}
   </head>
   <body>
-    <nav class="navbar navbar-expand-xl navbar-light bg-light">
+    {% if user.is_authenticated %}
+    <nav class="navbar navbar-expand-md navbar-light bg-light">
       <a class="navbar-brand" href="/">
         <img class="navbar-img" src="{% static "img/logo.svg" %}" alt="Endless">
       </a>
@@ -26,24 +27,19 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarCollapse">
         <ul class="navbar-nav ml-auto">
-          {% if user.is_authenticated %}
           <li class="nav-item">
             <a class="nav-link" href="{% url 'account_logout' %}">Logout</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'main:profile' %}">Profile</a>
-          </li>
-          {% else %}
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'account_signup' %}">Signup</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'account_login' %}">Login</a>
-          </li>
-          {% endif %}
         </ul>
       </div>
     </nav>
+    {% else %}
+    <nav class="navbar navbar-light bg-light justify-content-center">
+      <div class="navbar-brand">
+        <img class="navbar-img" src="{% static "img/logo.svg" %}" alt="Endless">
+      </a>
+    </nav>
+    {% endif %}
     <div class="container-fluid">
       {% for message in messages %}
       <div class="alert {{ message.tags }} alert-dismissible fade show" role="alert">
