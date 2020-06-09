@@ -1,23 +1,17 @@
 {% extends 'main/base.html' %}
 
 {% load i18n %}
+{% load crispy_forms_tags %}
 
 {% block title %}{% trans "Profile" %}{% endblock %}
 
 {% block content %}
 <h1>{% trans "Profile" %}</h1>
-<table>
-  <tr>
-    <th>Username:</th>
-    <td>{{ user.get_username }}</td>
-  </tr>
-  <tr>
-    <th>Name:</th>
-    <td>{{ user.get_full_name }}</td>
-  </tr>
-  <tr>
-    <th>Email:</th>
-    <td>{{ user.email }}</td>
-  </tr>
-</table>
+<form method="post" action="{% url 'main:profile' %}">
+  {% csrf_token %}
+  {{ form | crispy }}
+  <button class="btn btn-primary" type="submit">
+    {% trans "Update Profile" %}
+  </button>
+</form>
 {% endblock %}

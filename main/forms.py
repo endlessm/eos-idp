@@ -1,5 +1,7 @@
 from django import forms
 
+from .models import User
+
 
 class SignupForm(forms.Form):
     """Tweak the field order for the allauth signup form
@@ -18,3 +20,13 @@ class SignupForm(forms.Form):
 
     def signup(self, request, user):
         pass
+
+
+class ProfileForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = [
+            'username',
+            'first_name',
+            'last_name',
+        ]
