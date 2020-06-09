@@ -1,5 +1,5 @@
 __pycache__/
 /db.sqlite3
-/eosidp/local_settings.py
+/eosidp/settings/local.py
 /staticfiles/
 /venv/
