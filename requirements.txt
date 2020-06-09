@@ -1,3 +1,4 @@
+Brotli ~= 1.0.7
 Django ~= 3.0
 django-allauth ~= 0.42.0
 django-crispy-forms ~= 1.9.0
