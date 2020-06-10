@@ -45,7 +45,6 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
-    'allauth.socialaccount.providers.google',
     'crispy_forms',
 ]
 
@@ -124,6 +123,20 @@ ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
 ACCOUNT_SIGNUP_FORM_CLASS = 'main.forms.SignupForm'
 ACCOUNT_SIGNUP_EMAIL_ENTER_TWICE = True
 
+
+# Social account provider settings
+SOCIALACCOUNT_PROVIDERS = {}
+GOOGLE_CLIENT_ID = env_str('GOOGLE_CLIENT_ID')
+GOOGLE_CLIENT_SECRET = env_str('GOOGLE_CLIENT_SECRET')
+if GOOGLE_CLIENT_ID and GOOGLE_CLIENT_SECRET:
+    INSTALLED_APPS.append('allauth.socialaccount.providers.google')
+    SOCIALACCOUNT_PROVIDERS['google'] = {
+        'APP': {
+            'client_id': GOOGLE_CLIENT_ID,
+            'secret': GOOGLE_CLIENT_SECRET,
+            'key': ''
+        }
+    }
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
