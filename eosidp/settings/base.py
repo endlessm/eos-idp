@@ -15,26 +15,24 @@ from django.contrib.messages import constants as messages
 from .util import (  # noqa: F401
     BASE_DIR,
     base_path,
+    env_bool,
+    env_str,
+    env_list,
+    load_env_file,
 )
 
+load_env_file()
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'b2a6d6%!fni4fe#42w)wiup)#1br=!)7h_@vf1!y7=yb3^ukfx'
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-ALLOWED_HOSTS = []
+# Basic settings
+DEBUG = env_bool('DEBUG', False)
+SECRET_KEY = env_str('SECRET_KEY', 'badsecret' if DEBUG else '')
+ALLOWED_HOSTS = env_list('ALLOWED_HOSTS')
 
 
 # Application definition
-
 INSTALLED_APPS = [
     'main.apps.MainConfig',
-
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -42,14 +40,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sites',
-
     'oidc_provider',
-
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
-
     'crispy_forms',
 ]
 
@@ -65,6 +60,7 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'eosidp.urls'
+WSGI_APPLICATION = 'eosidp.wsgi.application'
 
 TEMPLATES = [
     {
@@ -84,8 +80,6 @@ TEMPLATES = [
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
-WSGI_APPLICATION = 'eosidp.wsgi.application'
-
 MESSAGE_TAGS = {
     messages.DEBUG: 'alert-secondary',
     messages.INFO: 'alert-info',
@@ -97,7 +91,6 @@ MESSAGE_TAGS = {
 
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -105,8 +98,8 @@ DATABASES = {
     }
 }
 
-# Authentication settings
 
+# Authentication settings
 AUTH_USER_MODEL = 'main.User'
 LOGIN_URL = '/login/'
 LOGIN_REDIRECT_URL = '/'
@@ -116,23 +109,23 @@ AUTHENTICATION_BACKENDS = [
     'allauth.account.auth_backends.AuthenticationBackend',
 ]
 
+
 # OpenID Connect settings
 # https://django-oidc-provider.readthedocs.io/en/latest/sections/settings.html
-
 OIDC_USERINFO = 'main.utils.oidc_userinfo'
+
 
 # Allauth settings
 # https://django-allauth.readthedocs.io/en/latest/configuration.html
-
 ACCOUNT_USERNAME_REQUIRED = True
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
 ACCOUNT_SIGNUP_FORM_CLASS = 'main.forms.SignupForm'
 ACCOUNT_SIGNUP_EMAIL_ENTER_TWICE = True
 
+
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
-
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
@@ -151,21 +144,15 @@ AUTH_PASSWORD_VALIDATORS = [
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/
-
 LANGUAGE_CODE = 'en-us'
-
 TIME_ZONE = 'UTC'
-
 USE_I18N = True
-
 USE_L10N = True
-
 USE_TZ = True
 
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
-
 STATIC_URL = '/static/'
 STATIC_ROOT = base_path('staticfiles')
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
