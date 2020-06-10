@@ -17,6 +17,7 @@ from .util import (  # noqa: F401
     base_path,
     env_bool,
     env_str,
+    env_int,
     env_list,
     load_env_file,
 )
@@ -149,6 +150,11 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 USE_L10N = True
 USE_TZ = True
+
+
+# Site ID, required for allauth
+# https://docs.djangoproject.com/en/3.0/ref/contrib/sites/
+SITE_ID = env_int('SITE_ID', 1)
 
 
 # Static files (CSS, JavaScript, Images)
