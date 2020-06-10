@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 from django.contrib.messages import constants as messages
+from email.utils import parseaddr
 
 from .util import (  # noqa: F401
     BASE_DIR,
@@ -175,6 +176,19 @@ SITE_ID = env_int('SITE_ID', 1)
 STATIC_URL = '/static/'
 STATIC_ROOT = base_path('staticfiles')
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+
+# Email
+# https://docs.djangoproject.com/en/3.0/topics/email/
+ADMINS = [parseaddr(addr) for addr in env_list('ADMINS', separator=',')]
+SERVER_EMAIL = env_str('SERVER_EMAIL', 'root@localhost')
+DEFAULT_FROM_EMAIL = env_str('DEFAULT_FROM_EMAIL', 'webmaster@localhost')
+EMAIL_HOST = env_str('EMAIL_HOST', 'localhost')
+EMAIL_PORT = env_int('EMAIL_PORT', 25)
+EMAIL_HOST_USER = env_str('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = env_str('EMAIL_HOST_PASSWORD')
+EMAIL_USE_TLS = env_bool('EMAIL_USE_TLS', False)
+EMAIL_USE_SSL = env_bool('EMAIL_USE_SSL', False)
 
 
 # Load local settings
