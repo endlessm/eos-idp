@@ -191,6 +191,36 @@ EMAIL_USE_TLS = env_bool('EMAIL_USE_TLS', False)
 EMAIL_USE_SSL = env_bool('EMAIL_USE_SSL', False)
 
 
+# Logging
+# https://docs.djangoproject.com/en/3.0/topics/logging/
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'standard': {
+            'format': '%(asctime)s [%(levelname)s] %(name)s: %(message)s',
+        }
+    },
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+            'formatter': 'standard',
+        }
+    },
+    'loggers': {
+        'main': {
+            'handlers': ['console'],
+            'level': env_str('LOG_LEVEL', 'DEBUG' if DEBUG else 'INFO'),
+            'propagate': False,
+        }
+    },
+    'root': {
+        'handlers': ['console'],
+        'level': env_str('ROOT_LOG_LEVEL', 'WARNING'),
+    }
+}
+
+
 # Load local settings
 try:
     from .local import *  # noqa
