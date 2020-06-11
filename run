@@ -1,0 +1,12 @@
+#!/bin/sh -e
+
+# It's expected that there will be an HTTP reverse proxy in front of the
+# app, so --forwarded-allow-ips is set to * so all X-Forwarded-* headers
+# are passed through.
+exec gunicorn \
+    --bind :8000 \
+    --workers "${WORKERS:-2}" \
+    --access-logfile - \
+    --error-logfile - \
+    --forwarded-allow-ips '*' \
+    eosidp.wsgi

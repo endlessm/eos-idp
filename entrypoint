@@ -1,0 +1,8 @@
+#!/bin/sh -e
+
+# Run database migrations. Not sure if this really safe to do
+# concurrently, but the docs say postgres and sqlite will use DDL
+# transactions.
+./manage.py migrate
+
+exec "$@"

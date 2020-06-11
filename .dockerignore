@@ -1,0 +1,10 @@
+**/*~
+**/__pycache__/
+/.env
+/.git
+/.gitignore
+/db.sqlite3
+/eosidp/settings/local.py
+/example.env
+/staticfiles/
+/venv/
