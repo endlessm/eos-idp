@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
+import dj_database_url
 from django.contrib.messages import constants as messages
 from email.utils import parseaddr
 
@@ -93,10 +94,8 @@ MESSAGE_TAGS = {
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': base_path('db.sqlite3'),
-    }
+    'default': dj_database_url.config(
+        default='sqlite:///{}'.format(base_path('db.sqlite3')))
 }
 
 
