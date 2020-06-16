@@ -4,4 +4,5 @@ dj-database-url ~= 0.5.0
 django-allauth ~= 0.42.0
 django-crispy-forms ~= 1.9.0
 django-oidc-provider ~= 0.7.0
+psycopg2 ~= 2.8.5
 whitenoise ~= 5.1.0
