@@ -10,6 +10,8 @@ RUN apt-get update && \
 COPY requirements.txt /
 RUN pip install --no-cache-dir --root /dest -r requirements.txt
 
+FROM vault:latest AS vault
+
 FROM python:3.8-slim
 
 RUN apt-get update && \
@@ -24,6 +26,7 @@ ADD https://s3.amazonaws.com/rds-downloads/rds-combined-ca-bundle.pem \
 RUN update-ca-certificates
 
 COPY --from=build /dest/ /
+COPY --from=vault /bin/vault /usr/bin/
 WORKDIR /opt/eos-idp
 COPY . .
 RUN python -m compileall .
@@ -31,7 +34,11 @@ RUN python -m compileall .
 # Need to pass non-empty SECRET_KEY since it's empty by default
 RUN SECRET_KEY=fake ./manage.py collectstatic -c --no-input
 
-USER nobody
+# Add user with real homedir since vault uses that
+RUN adduser --system --group --home /run/eos-idp --shell /usr/sbin/nologin \
+    eos-idp
+USER eos-idp
+
 EXPOSE 8000
 ENV WORKERS=2
 ENV DATABASE_URL=sqlite:////tmp/db.sqlite3
