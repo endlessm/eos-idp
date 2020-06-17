@@ -8,7 +8,8 @@ RUN apt-get update && \
     apt-get clean
 
 COPY requirements.txt /
-RUN pip install --no-cache-dir --root /dest -r requirements.txt
+RUN pip install --no-cache-dir --root /dest --no-warn-script-location \
+    -r requirements.txt
 
 FROM vault:latest AS vault
 
