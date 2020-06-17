@@ -9,4 +9,5 @@ exec gunicorn \
     --access-logfile - \
     --error-logfile - \
     --forwarded-allow-ips '*' \
+    --worker-tmp-dir /dev/shm \
     eosidp.wsgi
