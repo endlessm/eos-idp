@@ -1,7 +1,7 @@
 #!/bin/sh -e
 
 # Fetch secrets from vault if not set in the environment.
-: ${VAULT_LOGIN_ARGS:=-method=aws}
+: "${VAULT_LOGIN_ARGS:=-method=aws}"
 if [ -n "$VAULT_ADDR" ] && [ -n "$VAULT_SECRET_PATH" ]; then
     if [ -z "$VAULT_TOKEN" ]; then
         vault login $VAULT_LOGIN_ARGS
