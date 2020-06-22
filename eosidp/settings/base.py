@@ -22,9 +22,11 @@ from .util import (  # noqa: F401
     env_int,
     env_list,
     load_env_file,
+    Vault,
 )
 
 load_env_file()
+vault = Vault()
 
 
 # Basic settings
