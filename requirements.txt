@@ -3,6 +3,7 @@ Django ~= 3.0
 dj-database-url ~= 0.5.0
 django-allauth ~= 0.42.0
 django-crispy-forms ~= 1.9.0
+django-health-check ~= 3.12.1
 django-oidc-provider ~= 0.7.0
 gunicorn ~= 20.0.4
 hvac ~= 0.10.4

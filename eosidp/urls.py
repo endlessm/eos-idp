@@ -21,4 +21,5 @@ urlpatterns = [
     path('', include('allauth.urls')),
     path('', include('oidc_provider.urls', namespace='oidc_provider')),
     path('admin/', admin.site.urls),
+    path('status/', include('health_check.urls')),
 ]

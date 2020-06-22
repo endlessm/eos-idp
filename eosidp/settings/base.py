@@ -51,6 +51,9 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'crispy_forms',
+    'health_check',
+    'health_check.db',
+    'health_check.cache',
 ]
 
 MIDDLEWARE = [
