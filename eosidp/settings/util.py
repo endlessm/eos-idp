@@ -20,6 +20,16 @@ def base_path(*args):
     return os.path.join(BASE_DIR, *args)
 
 
+def str_to_bool(value, default=False):
+    value = value.lower()
+    if value in ('true', 'yes', '1'):
+        return True
+    elif value in ('false', 'no', '0'):
+        return False
+    else:
+        return default
+
+
 def env_bool(name, default=False):
     """
     Get a boolean value from environment variable.
@@ -29,12 +39,7 @@ def env_bool(name, default=False):
     """
     if name not in os.environ:
         return default
-    if os.environ[name].lower() in ['true', 'yes', '1']:
-        return True
-    elif os.environ[name].lower() in ['false', 'no', '0']:
-        return False
-    else:
-        return default
+    return str_to_bool(os.environ[name], default)
 
 
 def env_str(name, default=''):
