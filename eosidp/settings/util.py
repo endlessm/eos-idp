@@ -43,7 +43,9 @@ def _build_database_url(vault):
 
     host = vault.env_secret_str('DATABASE_HOST', 'database', 'host')
     if host:
-        url += f'{host}/'
+        url += f'{host}'
+
+    url += '/'
 
     name = vault.env_secret_str('DATABASE_NAME', 'database', 'name')
     if name:
