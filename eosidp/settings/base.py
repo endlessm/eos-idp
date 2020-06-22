@@ -10,13 +10,13 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
-import dj_database_url
 from django.contrib.messages import constants as messages
 from email.utils import parseaddr
 
 from .util import (  # noqa: F401
     BASE_DIR,
     base_path,
+    database_config,
     env_bool,
     env_str,
     env_int,
@@ -97,8 +97,8 @@ MESSAGE_TAGS = {
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 DATABASES = {
-    'default': dj_database_url.config(
-        default='sqlite:///{}'.format(base_path('db.sqlite3')))
+    'default': database_config(vault,
+                               'sqlite:///{}'.format(base_path('db.sqlite3')))
 }
 
 

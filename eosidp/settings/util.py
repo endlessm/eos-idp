@@ -1,9 +1,11 @@
+import dj_database_url
 import os
 import hvac
 
 __all__ = [
     'BASE_DIR',
     'base_path',
+    'database_config',
     'env_bool',
     'env_str',
     'env_int',
@@ -20,6 +22,51 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(
 def base_path(*args):
     """Path relative to project base directory"""
     return os.path.join(BASE_DIR, *args)
+
+
+def _build_database_url(vault):
+    url = env_str('DATABASE_URL')
+    if url:
+        return url
+
+    url = ''
+    engine = vault.env_secret_str('DATABASE_ENGINE', 'database', 'engine')
+    if not engine:
+        return None
+    url += f'{engine}://'
+
+    user = vault.env_secret_str('DATABASE_USER', 'database', 'user')
+    password = vault.env_secret_str('DATABASE_PASSWORD', 'database',
+                                    'password')
+    if user and password:
+        url += f'{user}:{password}@'
+
+    host = vault.env_secret_str('DATABASE_HOST', 'database', 'host')
+    if host:
+        url += f'{host}/'
+
+    name = vault.env_secret_str('DATABASE_NAME', 'database', 'name')
+    if name:
+        url += f'{name}'
+
+    options = vault.env_secret_str('DATABASE_OPTIONS', 'database', 'options')
+    if options:
+        url += '?{options}'
+
+    return url
+
+
+def database_config(vault, default):
+    """Build database configuration
+
+    If DATABASE_URL is not set, it can be composed from DATABASE_ENGINE,
+    DATABASE_USER, DATABASE_PASSWORD, DATABASE_HOST, DATABASE_PORT and
+    DATABASE_OPTIONS environment variables or vault.
+    """
+    url = _build_database_url(vault)
+    if not url:
+        url = default
+    return dj_database_url.parse(url)
 
 
 def str_to_bool(value, default=False):
