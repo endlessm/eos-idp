@@ -1,5 +1,10 @@
 #!/bin/sh -e
 
+# Run database migrations. Not sure if this really safe to do
+# concurrently, but the docs say postgres and sqlite will use DDL
+# transactions.
+./manage.py migrate
+
 # It's expected that there will be an HTTP reverse proxy in front of the
 # app, so --forwarded-allow-ips is set to * so all X-Forwarded-* headers
 # are passed through.

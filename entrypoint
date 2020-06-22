@@ -6,9 +6,4 @@ if [ -n "$VAULT_ADDR" ] && [ -z "$VAULT_TOKEN" ]; then
     vault login $VAULT_LOGIN_ARGS
 fi
 
-# Run database migrations. Not sure if this really safe to do
-# concurrently, but the docs say postgres and sqlite will use DDL
-# transactions.
-./manage.py migrate
-
 exec "$@"
