@@ -1,24 +1,9 @@
 #!/bin/sh -e
 
-# Fetch secrets from vault if not set in the environment.
+# Login to vault if a token isn't set in the environment.
 : "${VAULT_LOGIN_ARGS:=-method=aws}"
-if [ -n "$VAULT_ADDR" ] && [ -n "$VAULT_SECRET_PATH" ]; then
-    if [ -z "$VAULT_TOKEN" ]; then
-        vault login $VAULT_LOGIN_ARGS
-    fi
-
-    if [ -z "$SECRET_KEY" ]; then
-        SECRET_KEY=$(vault read -field=secret_key "$VAULT_SECRET_PATH/app")
-        export SECRET_KEY
-    fi
-
-    if [ -z "$GOOGLE_CLIENT_ID" ]; then
-        GOOGLE_CLIENT_ID=$(vault read -field=client_id \
-            "$VAULT_SECRET_PATH/google")
-        GOOGLE_CLIENT_SECRET=$(vault read -field=client_secret \
-            "$VAULT_SECRET_PATH/google")
-        export GOOGLE_CLIENT_ID GOOGLE_CLIENT_SECRET
-    fi
+if [ -n "$VAULT_ADDR" ] && [ -z "$VAULT_TOKEN" ]; then
+    vault login $VAULT_LOGIN_ARGS
 fi
 
 # Run database migrations. Not sure if this really safe to do

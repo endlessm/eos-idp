@@ -31,7 +31,8 @@ vault = Vault()
 
 # Basic settings
 DEBUG = env_bool('DEBUG', False)
-SECRET_KEY = env_str('SECRET_KEY', 'badsecret' if DEBUG else '')
+SECRET_KEY = vault.env_secret_str('SECRET_KEY', 'app', 'secret_key',
+                                  'badsecret' if DEBUG else '')
 ALLOWED_HOSTS = env_list('ALLOWED_HOSTS')
 
 
@@ -128,8 +129,10 @@ ACCOUNT_SIGNUP_EMAIL_ENTER_TWICE = True
 
 # Social account provider settings
 SOCIALACCOUNT_PROVIDERS = {}
-GOOGLE_CLIENT_ID = env_str('GOOGLE_CLIENT_ID')
-GOOGLE_CLIENT_SECRET = env_str('GOOGLE_CLIENT_SECRET')
+GOOGLE_CLIENT_ID = vault.env_secret_str('GOOGLE_CLIENT_ID', 'google',
+                                        'client_id')
+GOOGLE_CLIENT_SECRET = vault.env_secret_str('GOOGLE_CLIENT_SECRET', 'google',
+                                            'client_secret')
 if GOOGLE_CLIENT_ID and GOOGLE_CLIENT_SECRET:
     INSTALLED_APPS.append('allauth.socialaccount.providers.google')
     SOCIALACCOUNT_PROVIDERS['google'] = {
