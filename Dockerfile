@@ -42,6 +42,7 @@ USER eos-idp
 
 EXPOSE 8000
 ENV WORKERS=2
-ENV DATABASE_URL=sqlite:////tmp/db.sqlite3
+ENV DATABASE_ENGINE=sqlite
+ENV DATABASE_NAME=/run/eos-idp/db.sqlite3
 ENTRYPOINT ["./entrypoint"]
 CMD ["./run"]
