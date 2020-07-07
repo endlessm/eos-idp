@@ -161,8 +161,9 @@ class Vault(object):
     either be set through the VAULT_TOKEN environment variable or
     through the ~/.vault-token file as used by the vault CLI.
     """
-    def __init__(self):
-        self.secret_path = os.environ.get('VAULT_SECRET_PATH')
+    def __init__(self, address=None, secret_path=None):
+        self.address = address or os.environ.get('VAULT_ADDR')
+        self.secret_path = secret_path or os.environ.get('VAULT_SECRET_PATH')
         self.client = self._connect_client()
 
     def get_secret(self, path):
@@ -257,11 +258,7 @@ class Vault(object):
             return self.secret_list(path, key, default)
 
     def _connect_client(self):
-        if self.secret_path is None:
-            return None
-
-        address = os.environ.get('VAULT_ADDR')
-        if not address:
+        if self.address is None or self.secret_path is None:
             return None
 
         client = None
@@ -275,8 +272,8 @@ class Vault(object):
                 token = f.read()
 
         if token:
-            print(f'Connecting to vault server {address}')
-            client = hvac.Client(url=address, token=token)
+            print(f'Connecting to vault server {self.address}')
+            client = hvac.Client(url=self.address, token=token)
             if not client.is_authenticated():
                 raise VaultError('Could not authenticate to vault')
 
