@@ -162,7 +162,7 @@ class Vault(object):
     through the ~/.vault-token file as used by the vault CLI.
     """
     def __init__(self):
-        self.secret_path = os.environ.get('VAULT_SECRET_PATH', '')
+        self.secret_path = os.environ.get('VAULT_SECRET_PATH')
         self.client = self._connect_client()
 
     def get_secret(self, path):
@@ -257,6 +257,9 @@ class Vault(object):
             return self.secret_list(path, key, default)
 
     def _connect_client(self):
+        if self.secret_path is None:
+            return None
+
         address = os.environ.get('VAULT_ADDR')
         if not address:
             return None
