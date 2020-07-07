@@ -1,0 +1,30 @@
+#!/bin/sh -e
+
+# Create a superuser from vault secrets. The use case here is for
+# bootstrapping a superuser onto a new system non-interactively.
+
+# VAULT_ADDR and VAULT_ADMIN_SECRET_PATH must be set
+if [ -z "$VAULT_ADDR" ]; then
+    echo "error: VAULT_ADDR not set" >&2
+    exit 1
+fi
+if [ -z "$VAULT_ADMIN_SECRET_PATH" ]; then
+    echo "error: VAULT_ADMIN_SECRET_PATH not set" >&2
+    exit 1
+fi
+
+# Login to vault if a token isn't set in the environment.
+if [ -z "$VAULT_TOKEN" ]; then
+    vault login ${VAULT_LOGIN_ARGS:--method=aws}
+fi
+
+# Fetch the secrets from vault
+path="$VAULT_ADMIN_SECRET_PATH/superuser"
+DJANGO_SUPERUSER_USERNAME=$(vault read -field=username "$path")
+DJANGO_SUPERUSER_PASSWORD=$(vault read -field=password "$path")
+DJANGO_SUPERUSER_EMAIL=$(vault read -field=email "$path")
+export DJANGO_SUPERUSER_USERNAME DJANGO_SUPERUSER_PASSWORD \
+    DJANGO_SUPERUSER_EMAIL
+
+# Create the superuser
+./manage.py createsuperuser --noinput -v1
