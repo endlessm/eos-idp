@@ -2,7 +2,8 @@
 
 # Login to vault if a token isn't set in the environment.
 : "${VAULT_LOGIN_ARGS:=-method=aws}"
-if [ -n "$VAULT_ADDR" ] && [ -n "$VAULT_SECRET_PATH" ] && [ -z "$VAULT_TOKEN" ]
+if [ -n "$VAULT_ADDR" ] && [ -n "$VAULT_SECRET_PATH" ] \
+    && [ -z "$(vault print token)" ]
 then
     vault login $VAULT_LOGIN_ARGS
 fi

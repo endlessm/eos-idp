@@ -13,9 +13,10 @@ if [ -z "$VAULT_ADMIN_SECRET_PATH" ]; then
     exit 1
 fi
 
-# Login to vault if a token isn't set in the environment.
-if [ -z "$VAULT_TOKEN" ]; then
-    vault login ${VAULT_LOGIN_ARGS:--method=aws}
+# Login to vault if a token isn't available.
+: "${VAULT_LOGIN_ARGS:=-method=aws}"
+if [ -z "$(vault print token)" ]; then
+    vault login $VAULT_LOGIN_ARGS
 fi
 
 # Fetch the secrets from vault
