@@ -16,7 +16,7 @@ fi
 # Login to vault if a token isn't available.
 : "${VAULT_LOGIN_ARGS:=-method=aws}"
 if [ -z "$(vault print token)" ]; then
-    vault login $VAULT_LOGIN_ARGS
+    vault login -no-print $VAULT_LOGIN_ARGS
 fi
 
 # Fetch the secrets from vault
