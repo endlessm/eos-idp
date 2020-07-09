@@ -30,5 +30,5 @@ export DJANGO_SUPERUSER_USERNAME DJANGO_SUPERUSER_PASSWORD \
 # Run database migrations in case we're racing with the service
 ./manage.py migrate
 
-# Create the superuser
-./manage.py createsuperuser --noinput -v1
+# Ensure the superuser exists
+./manage.py ensuresuperuser --noinput -v1
