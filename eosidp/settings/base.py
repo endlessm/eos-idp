@@ -176,6 +176,8 @@ USE_TZ = True
 # Site ID, required for allauth
 # https://docs.djangoproject.com/en/3.0/ref/contrib/sites/
 SITE_ID = env_int('SITE_ID', 1)
+SITE_DOMAIN = env_str('SITE_DOMAIN', None)
+SITE_NAME = env_str('SITE_NAME', None)
 
 
 # Static files (CSS, JavaScript, Images)
