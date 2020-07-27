@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sites',
+    'main.apps.MainConfig',
     'oidc_provider',
     'allauth',
     'allauth.account',
@@ -53,7 +54,6 @@ INSTALLED_APPS = [
     'health_check',
     'health_check.db',
     'health_check.cache',
-    'main.apps.MainConfig',
 ]
 
 MIDDLEWARE = [
