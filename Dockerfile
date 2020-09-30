@@ -18,6 +18,7 @@ FROM python:3.8-slim
 RUN apt-get update && \
     apt-get -y install \
         ca-certificates \
+        curl \
         libpq5 \
         && \
     apt-get clean
