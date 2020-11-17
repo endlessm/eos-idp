@@ -8,6 +8,7 @@ if not SECRET_KEY:
     SECRET_KEY = 'badsecret'
 
 # Include all supported socialaccount providers
-for app in ('allauth.socialaccount.providers.google'):
+for app in ('allauth.socialaccount.providers.google',
+            'allauth.socialaccount.providers.facebook'):
     if app not in INSTALLED_APPS:
         INSTALLED_APPS.append(app)
