@@ -33,8 +33,9 @@ WORKDIR /opt/eos-idp
 COPY . .
 RUN python -m compileall .
 
-# Need to pass non-empty SECRET_KEY since it's empty by default
-RUN SECRET_KEY=fake ./manage.py collectstatic -c --no-input
+# Need to use custom settings to ensure consistent apps and use a fake
+# secret key.
+RUN ./manage.py collectstatic -c --no-input --settings eosidp.settings.build
 
 # Add user with real homedir since vault uses that
 RUN adduser --system --group --home /run/eos-idp --shell /usr/sbin/nologin \
