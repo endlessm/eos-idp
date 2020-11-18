@@ -132,6 +132,7 @@ ACCOUNT_SIGNUP_EMAIL_ENTER_TWICE = True
 
 # Social account provider settings
 SOCIALACCOUNT_PROVIDERS = {}
+
 GOOGLE_CLIENT_ID = vault.env_secret_str('GOOGLE_CLIENT_ID', 'google',
                                         'client_id')
 GOOGLE_CLIENT_SECRET = vault.env_secret_str('GOOGLE_CLIENT_SECRET', 'google',
@@ -142,6 +143,24 @@ if GOOGLE_CLIENT_ID and GOOGLE_CLIENT_SECRET:
         'APP': {
             'client_id': GOOGLE_CLIENT_ID,
             'secret': GOOGLE_CLIENT_SECRET,
+            'key': ''
+        }
+    }
+
+FACEBOOK_CLIENT_ID = vault.env_secret_str('FACEBOOK_CLIENT_ID',
+                                          'facebook',
+                                          'client_id')
+FACEBOOK_CLIENT_SECRET = vault.env_secret_str('FACEBOOK_CLIENT_SECRET',
+                                              'facebook',
+                                              'client_secret')
+if FACEBOOK_CLIENT_ID and FACEBOOK_CLIENT_SECRET:
+    INSTALLED_APPS.append('allauth.socialaccount.providers.facebook')
+    SOCIALACCOUNT_PROVIDERS['facebook'] = {
+        'SCOPE': ['public_profile', 'email'],
+        'VERSION': 'v9.0',
+        'APP': {
+            'client_id': FACEBOOK_CLIENT_ID,
+            'secret': FACEBOOK_CLIENT_SECRET,
             'key': ''
         }
     }
