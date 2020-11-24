@@ -1,9 +1,7 @@
-// The primary image tag. For a pull request, the tag will be named
-// pr<number>. Otherwise the branch name will be used.
-def tag = params.ghprbPullId ? 'pr' + params.ghprbPullId : env.GIT_BRANCH
-
-// An extra image tag such as `latest` from a TAG job parameter.
-def extra_tag = params.TAG
+// The image tag. For a pull request, the tag will be named pr<number>.
+// Otherwise the TAG parameter is used.
+def tag = params.ghprbPullId ? 'pr' + params.ghprbPullId : params.TAG
+assert tag != null
 
 // Registry URL and credentials to use for pushing.
 def registry = params.REGISTRY ?: 'https://index.docker.io/v1/'
@@ -26,9 +24,6 @@ node {
     stage('Publish') {
         docker.withRegistry(registry, credentials) {
             image.push()
-            if (extra_tag) {
-                image.push(extra_tag)
-            }
         }
     }
 }
