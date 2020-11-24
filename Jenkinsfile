@@ -13,22 +13,24 @@ node {
     def image
 
     stage('Build') {
-        checkout scm
-        image = docker.build("endlessm/eos-idp:${tag}")
+        params.each { var, val -> println "Param $var=$val" }
+        def git_vars = checkout scm
+        git_vars.each { var, val -> println "Env $var=$val" }
+        // image = docker.build("endlessm/eos-idp:${tag}")
     }
 
-    stage('Test') {
-        image.inside {
-            sh './manage.py test --settings eosidp.settings.test'
-        }
-    }
+    // stage('Test') {
+    //     image.inside {
+    //         sh './manage.py test --settings eosidp.settings.test'
+    //     }
+    // }
 
-    stage('Publish') {
-        docker.withRegistry(registry, credentials) {
-            image.push()
-            if (extra_tag) {
-                image.push(extra_tag)
-            }
-        }
-    }
+    // stage('Publish') {
+    //     docker.withRegistry(registry, credentials) {
+    //         image.push()
+    //         if (extra_tag) {
+    //             image.push(extra_tag)
+    //         }
+    //     }
+    // }
 }
