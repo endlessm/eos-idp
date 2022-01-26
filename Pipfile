@@ -1,0 +1,28 @@
+# See https://pipenv.pypa.io/en/latest/ for usage.
+
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+Brotli = "~=1.0.7"
+Django = "~=3.0"
+dj-database-url = "~=0.5.0"
+django-allauth = "~=0.42.0"
+django-crispy-forms = "~=1.9.0"
+django-health-check = "~=3.12.1"
+django-oidc-provider = "~=0.7.0"
+gunicorn = "~=20.0.4"
+hvac = "~=0.10.4"
+psycopg2 = "~=2.8.5"
+whitenoise = "~=5.1.0"
+
+[dev-packages]
+
+[requires]
+# Keep this in sync with the python version in Dockerfile.
+python_version = "3.9"
+
+[scripts]
+test = "./manage.py test --settings eosidp.settings.test"

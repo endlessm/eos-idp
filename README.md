@@ -87,3 +87,18 @@ Now run it the container.
 ```
 docker run --rm --env-file .env -p 8000:8000 eos-idp
 ```
+
+## Development
+
+Dependencies are managed with [Pipenv][pipenv] in the
+[`Pipfile`](Pipfile). Run `pipenv install` to install a `virtualenv`
+with the specified dependencies. Run `pipenv run test` to run the test
+suite.
+
+To update dependencies, make the appropriate changes to `Pipfile` and
+run `pipenv lock`. For deployment convenience, a `requirements.txt` file
+is maintained. This is generated from the versions in the `Pipfile.lock`
+file. When updating dependencies, run `pipenv lock -r >
+requirements.txt`.
+
+[pipenv]: https://pipenv.pypa.io/en/latest/
