@@ -35,6 +35,12 @@ SECRET_KEY = vault.env_secret_str('SECRET_KEY', 'app', 'secret_key',
                                   'badsecret' if DEBUG else '')
 ALLOWED_HOSTS = env_list('ALLOWED_HOSTS')
 
+# Maintain the previous default of AutoField to avoid gratuitous
+# migrations.
+#
+# https://docs.djangoproject.com/en/3.2/ref/settings/#std:setting-DEFAULT_AUTO_FIELD
+DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
+
 
 # Application definition
 INSTALLED_APPS = [
