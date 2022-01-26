@@ -1,4 +1,4 @@
-FROM python:3.8-slim AS build
+FROM python:3.9-slim AS build
 
 RUN apt-get update && \
     apt-get -y install \
@@ -13,7 +13,7 @@ RUN pip install --no-cache-dir --root /dest --no-warn-script-location \
 
 FROM vault:latest AS vault
 
-FROM python:3.8-slim
+FROM python:3.9-slim
 
 RUN apt-get update && \
     apt-get -y install \
