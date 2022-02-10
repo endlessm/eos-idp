@@ -7,7 +7,7 @@ name = "pypi"
 
 [packages]
 Brotli = "~=1.0.7"
-Django = "~=3.0"
+Django = "~=3.2"
 dj-database-url = "~=0.5.0"
 django-allauth = "~=0.42.0"
 django-crispy-forms = "~=1.9.0"
