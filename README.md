@@ -98,7 +98,7 @@ suite.
 To update dependencies, make the appropriate changes to `Pipfile` and
 run `pipenv lock`. For deployment convenience, a `requirements.txt` file
 is maintained. This is generated from the versions in the `Pipfile.lock`
-file. When updating dependencies, run `pipenv lock -r >
+file. When updating dependencies, run `pipenv requirements >
 requirements.txt`.
 
 [pipenv]: https://pipenv.pypa.io/en/latest/
