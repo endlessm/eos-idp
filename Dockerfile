@@ -1,4 +1,4 @@
-FROM python:3.9-slim AS build
+FROM docker.io/python:3.9-slim AS build
 
 RUN apt-get update && \
     apt-get -y install \
@@ -11,9 +11,9 @@ COPY requirements.txt /
 RUN pip install --no-cache-dir --root /dest --no-warn-script-location \
     -r requirements.txt
 
-FROM vault:latest AS vault
+FROM docker.io/hashicorp/vault:latest AS vault
 
-FROM python:3.9-slim
+FROM docker.io/python:3.9-slim
 
 RUN apt-get update && \
     apt-get -y install \

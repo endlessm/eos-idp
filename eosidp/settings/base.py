@@ -163,7 +163,7 @@ if FACEBOOK_CLIENT_ID and FACEBOOK_CLIENT_SECRET:
     INSTALLED_APPS.append('allauth.socialaccount.providers.facebook')
     SOCIALACCOUNT_PROVIDERS['facebook'] = {
         'SCOPE': ['public_profile', 'email'],
-        'VERSION': 'v9.0',
+        'VERSION': 'v19.0',
         'APP': {
             'client_id': FACEBOOK_CLIENT_ID,
             'secret': FACEBOOK_CLIENT_SECRET,
