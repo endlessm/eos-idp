@@ -23,7 +23,7 @@ RUN apt-get update && \
         && \
     apt-get clean
 
-ADD https://s3.amazonaws.com/rds-downloads/rds-combined-ca-bundle.pem \
+ADD https://truststore.pki.rds.amazonaws.com/global/global-bundle.pem \
     /usr/local/share/ca-certificates/rds.crt
 RUN update-ca-certificates
 
