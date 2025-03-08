@@ -135,6 +135,11 @@ ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
 ACCOUNT_SIGNUP_FORM_CLASS = 'main.forms.SignupForm'
 ACCOUNT_SIGNUP_EMAIL_ENTER_TWICE = True
 
+# For social accounts, emails are optional as the provider is handling
+# authentication of the user.
+SOCIALACCOUNT_EMAIL_REQUIRED = False
+SOCIALACCOUNT_EMAIL_VERIFICATION = 'optional'
+
 
 # Social account provider settings
 SOCIALACCOUNT_PROVIDERS = {}
